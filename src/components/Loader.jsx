@@ -4,8 +4,10 @@ import "./Loader.css";
 
 const Loader = () => {
   return (
-    <div className="loader-container">
-      <div className="loader-bar"></div>
+    <div className="spinner-container">
+      <div className="spinner">
+        <div className="spinner-inner"></div>
+      </div>
     </div>
   );
 };

@@ -1,44 +1,49 @@
-/* FolderList.css */
-
-/* Lista de carpetas */
+/* FolderList.css - Estilo de listas */
 .folder-list ul {
   list-style-type: none;
   padding: 0;
 }
 
 .folder-list li {
-  background: #1e1e1e;
+  background: #7E8D85;
   margin: 10px 0;
-  padding: 15px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 20px;
+  border: 1px solid #B3BFB8;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .folder-list li:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Estilo para los nombres de carpetas */
 .folder-list li span {
   font-weight: bold;
   cursor: pointer;
-  color: #00e676;
-  transition: color 0.3s;
+  color: #A2E3C4;
+  transition: color 0.3s ease;
 }
 
 .folder-list li span:hover {
-  color: #1de9b6;
+  color: #F0F7F4;
 }
 
-/* Botones */
 .folder-list button {
   margin-left: 10px;
+  background-color: #B3BFB8;
+  color: #3C493F;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 15px;
+  transition: background-color 0.3s ease;
 }
 
-/* Lista de tareas */
+.folder-list button:hover {
+  background-color: #A2E3C4;
+}
+
 .folder-list ul ul {
   margin-top: 10px;
   padding-left: 20px;
@@ -48,39 +53,37 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 0;
-  border-bottom: 1px solid #333;
+  padding: 8px 0;
+  border-bottom: 1px solid #B3BFB8;
 }
 
 .folder-list .task-item:last-child {
   border-bottom: none;
 }
 
-.folder-list .task-item input {
-  width: auto;
-  margin-left: 10px;
-  background-color: #1e1e1e;
-  color: #e0e0e0;
-  border: 1px solid #444;
+.folder-list .task-item.completed span {
+  position: relative;
+  color: #A2E3C4;
+  text-decoration: line-through;
+  transition: color 0.3s ease;
 }
 
-/* Detalles de tarea */
 .task-details {
   margin-top: 20px;
-  background: #212121;
-  padding: 15px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  color: #e0e0e0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: #7E8D85;
+  padding: 20px;
+  border: 1px solid #B3BFB8;
+  border-radius: 12px;
+  color: #F0F7F4;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .task-details h3 {
   margin-top: 0;
-  color: #00bfa5;
+  color: #A2E3C4;
+  transition: color 0.3s ease;
 }
 
-/* Formulario de tareas */
 .task-form {
   display: flex;
   flex-direction: column;
@@ -89,56 +92,28 @@
 
 .task-form input {
   margin-bottom: 10px;
-  background-color: #1e1e1e;
-  color: #e0e0e0;
-  border: 1px solid #333;
+  background-color: #B3BFB8;
+  border: 2px solid #7E8D85;
+  border-radius: 8px;
+  color: #3C493F;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.task-form input:focus {
+  background-color: #A2E3C4;
+  border-color: #3C493F;
 }
 
 .task-form button {
   align-self: flex-start;
-  background-color: #00bfa5;
-  border: none;
-  color: #121212;
+  background-color: #A2E3C4;
+  color: #3C493F;
   font-weight: bold;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .task-form button:hover {
-  background-color: #1de9b6;
-  color: #121212;
-}
-
-/* Ocultar el contenido principal cuando se carga */
-div {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-
-div.loading {
-  opacity: 0.5;
-  pointer-events: none;
-}
-/* Animación para tachar texto al completar una tarea */
-.folder-list .task-item.completed span {
-  position: relative; /* Necesario para pseudo-elementos */
-  color: #d9c8a0; /* Beige suave para el texto completado */
-  transition: color 0.5s ease-in-out; /* Transición más suave del color */
-}
-
-.folder-list .task-item.completed span::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 0;
-  height: 2px;
-  background: #d9c8a0; /* Beige suave para la línea de tachado */
-  transition: width 0.6s ease-in-out; /* Transición más larga para suavidad */
-}
-
-.folder-list .task-item.completed span:hover::after {
-  background: #e3d2b3; /* Color ligeramente más claro al pasar el ratón */
-}
-
-.folder-list .task-item.completed span.completed-text::after {
-  width: 100%; /* La línea de tachado se extiende completamente */
+  background-color: #7E8D85;
+  transform: translateY(-3px);
 }
