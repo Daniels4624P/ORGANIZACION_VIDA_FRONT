@@ -1,0 +1,80 @@
+/* App.css */
+
+/* Estilo global */
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Contenedor principal */
+div {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Título principal */
+h1 {
+  text-align: center;
+  color: #00bfa5;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Botones generales */
+button {
+  background-color: #1f1f1f;
+  color: #00bfa5;
+  border: 1px solid #00bfa5;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #00bfa5;
+  color: #121212;
+  transform: scale(1.05);
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  margin-right: 10px;
+  width: calc(100% - 30px);
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+input:focus {
+  border-color: #00bfa5;
+  outline: none;
+}
+
+form {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+form input,
+form button {
+  max-width: 300px;
+}
+
+/* Ocultar el contenido principal cuando se carga */
+div {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+div.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}

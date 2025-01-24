@@ -1,0 +1,119 @@
+/* FolderList.css */
+
+/* Lista de carpetas */
+.folder-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.folder-list li {
+  background: #1e1e1e;
+  margin: 10px 0;
+  padding: 15px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.folder-list li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para los nombres de carpetas */
+.folder-list li span {
+  font-weight: bold;
+  cursor: pointer;
+  color: #00e676;
+  transition: color 0.3s;
+}
+
+.folder-list li span:hover {
+  color: #1de9b6;
+}
+
+/* Botones */
+.folder-list button {
+  margin-left: 10px;
+}
+
+/* Lista de tareas */
+.folder-list ul ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.folder-list .task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid #333;
+}
+
+.folder-list .task-item:last-child {
+  border-bottom: none;
+}
+
+.folder-list .task-item input {
+  width: auto;
+  margin-left: 10px;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+/* Detalles de tarea */
+.task-details {
+  margin-top: 20px;
+  background: #212121;
+  padding: 15px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.task-details h3 {
+  margin-top: 0;
+  color: #00bfa5;
+}
+
+/* Formulario de tareas */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.task-form input {
+  margin-bottom: 10px;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #333;
+}
+
+.task-form button {
+  align-self: flex-start;
+  background-color: #00bfa5;
+  border: none;
+  color: #121212;
+  font-weight: bold;
+}
+
+.task-form button:hover {
+  background-color: #1de9b6;
+  color: #121212;
+}
+
+/* Ocultar el contenido principal cuando se carga */
+div {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+div.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
