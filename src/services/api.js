@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Base URL de tu API
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api/v1',
+  baseURL: 'https://organizacion-vida.onrender.com/api/v1',
 });
 
 export const obtenerUnaTarea = (id) => api.get(`/tareas${id}`);
