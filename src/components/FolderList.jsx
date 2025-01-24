@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./FolderList.css"; // Archivo CSS para los estilos personalizados.
+import "./FolderList.css";
 
 const FolderList = ({
   folders,
@@ -13,13 +13,15 @@ const FolderList = ({
   const [newFolderName, setNewFolderName] = useState("");
   const [selectedFolderId, setSelectedFolderId] = useState(null);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [editingTaskId, setEditingTaskId] = useState(null);
+  const [editedTaskName, setEditedTaskName] = useState("");
 
   const handleFolderEdit = (id, nombre) => {
     setEditFolderId(id);
     setNewFolderName(nombre);
   };
 
-  const handleSubmitEdit = (id) => {
+  const handleSubmitFolderEdit = (id) => {
     onEditFolder(id, newFolderName);
     setEditFolderId(null);
   };
@@ -32,6 +34,20 @@ const FolderList = ({
     setSelectedTask(selectedTask?.id === task.id ? null : task);
   };
 
+  const handleTaskEdit = (task) => {
+    setEditingTaskId(task.id);
+    setEditedTaskName(task.nombre);
+  };
+
+  const handleSubmitTaskEdit = (task) => {
+    onEditTask(task.id, { nombre: editedTaskName, completa: task.completa });
+    setEditingTaskId(null);
+  };
+
+  const toggleTaskCompletion = (task) => {
+    onEditTask(task.id, { nombre: task.nombre, completada: !task.completada });
+  };
+
   return (
     <div className="folder-list">
       <ul>
@@ -42,11 +58,13 @@ const FolderList = ({
                 type="text"
                 value={newFolderName}
                 onChange={(e) => setNewFolderName(e.target.value)}
-                onBlur={() => handleSubmitEdit(folder.id)}
+                onBlur={() => handleSubmitFolderEdit(folder.id)}
                 autoFocus
               />
             ) : (
-              <span onDoubleClick={() => handleFolderEdit(folder.id, folder.nombre)}>
+              <span
+                onDoubleClick={() => handleFolderEdit(folder.id, folder.nombre)}
+              >
                 {folder.nombre}
               </span>
             )}
@@ -58,16 +76,44 @@ const FolderList = ({
             {selectedFolderId === folder.id && (
               <ul>
                 {folder.tareas.map((tarea) => (
-                  <li key={tarea.id} className="task-item">
-                    <span onClick={() => handleTaskClick(tarea)}>{tarea.nombre}</span>
-                    <input
-                      type="text"
-                      value={tarea.nombre}
-                      onChange={(e) =>
-                        onEditTask(tarea.id, { nombre: e.target.value })
-                      }
-                    />
-                    <button onClick={() => onDeleteTask(tarea.id)}>Eliminar tarea</button>
+                  <li
+                    key={tarea.id}
+                    className={`task-item ${tarea.completada ? "completed" : ""}`}
+                  >
+                    {editingTaskId === tarea.id ? (
+                      <>
+                        <input
+                          type="text"
+                          value={editedTaskName}
+                          onChange={(e) => setEditedTaskName(e.target.value)}
+                        />
+                        <button onClick={() => handleSubmitTaskEdit(tarea)}>
+                          Guardar
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <span
+                          onClick={() => handleTaskClick(tarea)}
+                          className={tarea.completa ? "completed-text" : ""}
+                        >
+                          {tarea.nombre}
+                        </span>
+                        <button
+                          onClick={() => handleTaskEdit(tarea)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => toggleTaskCompletion(tarea)}
+                        >
+                          {tarea.completada ? "Desmarcar" : "Completar"}
+                        </button>
+                        <button onClick={() => onDeleteTask(tarea.id)}>
+                          Eliminar tarea
+                        </button>
+                      </>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -78,7 +124,6 @@ const FolderList = ({
         ))}
       </ul>
 
-      {/* Mostrar la descripción de la tarea seleccionada */}
       {selectedTask && (
         <div className="task-details">
           <h3>{selectedTask.nombre}</h3>

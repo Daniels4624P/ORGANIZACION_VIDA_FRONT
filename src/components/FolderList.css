@@ -117,3 +117,28 @@ div.loading {
   opacity: 0.5;
   pointer-events: none;
 }
+/* Animación para tachar texto al completar una tarea */
+.folder-list .task-item.completed span {
+  position: relative; /* Necesario para pseudo-elementos */
+  color: #d9c8a0; /* Beige suave para el texto completado */
+  transition: color 0.5s ease-in-out; /* Transición más suave del color */
+}
+
+.folder-list .task-item.completed span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 2px;
+  background: #d9c8a0; /* Beige suave para la línea de tachado */
+  transition: width 0.6s ease-in-out; /* Transición más larga para suavidad */
+}
+
+.folder-list .task-item.completed span:hover::after {
+  background: #e3d2b3; /* Color ligeramente más claro al pasar el ratón */
+}
+
+.folder-list .task-item.completed span.completed-text::after {
+  width: 100%; /* La línea de tachado se extiende completamente */
+}
