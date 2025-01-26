@@ -1,60 +1,67 @@
-/* FolderList.css - Estilo de listas */
+/* FolderList.css - Minimalista y moderno */
 .folder-list ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .folder-list li {
-  background: #7E8D85;
-  margin: 10px 0;
-  padding: 20px;
-  border: 1px solid #B3BFB8;
+  background: var(--background-color);
+  margin: 0.5rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--text-color);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .folder-list li:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .folder-list li span {
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  color: #A2E3C4;
+  color: var(--text-color);
   transition: color 0.3s ease;
 }
 
 .folder-list li span:hover {
-  color: #F0F7F4;
+  color: var(--background-color);
+  text-decoration: underline;
 }
 
 .folder-list button {
-  margin-left: 10px;
-  background-color: #B3BFB8;
-  color: #3C493F;
+  margin-left: 0.5rem;
+  background-color: var(--text-color);
+  color: var(--background-color);
   border: none;
   border-radius: 8px;
-  padding: 8px 15px;
-  transition: background-color 0.3s ease;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .folder-list button:hover {
-  background-color: #A2E3C4;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transform: translateY(-3px);
 }
 
 .folder-list ul ul {
-  margin-top: 10px;
-  padding-left: 20px;
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
 }
 
 .folder-list .task-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #B3BFB8;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--text-color);
 }
 
 .folder-list .task-item:last-child {
@@ -63,57 +70,73 @@
 
 .folder-list .task-item.completed span {
   position: relative;
-  color: #A2E3C4;
+  color: var(--text-color);
   text-decoration: line-through;
-  transition: color 0.3s ease;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
 }
 
 .task-details {
-  margin-top: 20px;
-  background: #7E8D85;
-  padding: 20px;
-  border: 1px solid #B3BFB8;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: var(--background-color);
+  border: 1px solid var(--text-color);
   border-radius: 12px;
-  color: #F0F7F4;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .task-details h3 {
   margin-top: 0;
-  color: #A2E3C4;
-  transition: color 0.3s ease;
+  color: var(--text-color);
+  font-weight: 700;
 }
-
-.task-form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-}
-
-.task-form input {
-  margin-bottom: 10px;
-  background-color: #B3BFB8;
-  border: 2px solid #7E8D85;
+.folder-list button {
+  display: inline-block;
+  background-color: var(--primary-color); /* Usa la variable del color principal */
+  color: #ffffff;
+  border: none;
   border-radius: 8px;
-  color: #3C493F;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 120px; /* Ancho mínimo para dispositivos pequeños */
 }
 
-.task-form input:focus {
-  background-color: #A2E3C4;
-  border-color: #3C493F;
-}
-
-.task-form button {
-  align-self: flex-start;
-  background-color: #A2E3C4;
-  color: #3C493F;
-  font-weight: bold;
-  border-radius: 12px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.task-form button:hover {
-  background-color: #7E8D85;
+.folder-list button:hover {
+  background-color: var(--hover-color); /* Color al pasar el cursor */
   transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.folder-list button:active {
+  transform: translateY(0);
+}
+
+.folder-list button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.folder-list ul ul button {
+  margin-top: 0.5rem; /* Espaciado adicional para botones anidados */
+}
+
+@media (max-width: 768px) {
+  .folder-list button {
+    font-size: 0.8rem; /* Reduce el tamaño del texto en pantallas pequeñas */
+    padding: 0.4rem 0.8rem; /* Reduce el padding */
+    min-width: 100px; /* Ajusta el ancho mínimo */
+  }
+}
+
+@media (max-width: 480px) {
+  .folder-list button {
+    font-size: 0.75rem; /* Más pequeño en pantallas muy pequeñas */
+    padding: 0.3rem 0.6rem; /* Ajuste adicional para dispositivos muy pequeños */
+    min-width: 90px;
+  }
 }

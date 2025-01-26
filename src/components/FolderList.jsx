@@ -52,7 +52,7 @@ const FolderList = ({
     <div className="folder-list">
       <ul>
         {folders.map((folder) => (
-          <li key={folder.id}>
+          <li key={folder.id} className="folder-item">
             {editFolderId === folder.id ? (
               <input
                 type="text"
@@ -60,21 +60,25 @@ const FolderList = ({
                 onChange={(e) => setNewFolderName(e.target.value)}
                 onBlur={() => handleSubmitFolderEdit(folder.id)}
                 autoFocus
+                className="folder-input"
               />
             ) : (
               <span
                 onDoubleClick={() => handleFolderEdit(folder.id, folder.nombre)}
+                className="folder-name"
               >
                 {folder.nombre}
               </span>
             )}
-            <button onClick={() => onDeleteFolder(folder.id)}>Eliminar</button>
-            <button onClick={() => toggleFolder(folder.id)}>
-              {selectedFolderId === folder.id ? "Ocultar Tareas" : "Ver Tareas"}
-            </button>
+            <div className="folder-actions">
+              <button onClick={() => onDeleteFolder(folder.id)}>Eliminar</button>
+              <button onClick={() => toggleFolder(folder.id)}>
+                {selectedFolderId === folder.id ? "Ocultar Tareas" : "Ver Tareas"}
+              </button>
+            </div>
 
             {selectedFolderId === folder.id && (
-              <ul>
+              <ul className="task-list">
                 {folder.tareas.map((tarea) => (
                   <li
                     key={tarea.id}
@@ -86,6 +90,7 @@ const FolderList = ({
                           type="text"
                           value={editedTaskName}
                           onChange={(e) => setEditedTaskName(e.target.value)}
+                          className="task-input"
                         />
                         <button onClick={() => handleSubmitTaskEdit(tarea)}>
                           Guardar
@@ -99,19 +104,17 @@ const FolderList = ({
                         >
                           {tarea.nombre}
                         </span>
-                        <button
-                          onClick={() => handleTaskEdit(tarea)}
-                        >
-                          Editar
-                        </button>
-                        <button
-                          onClick={() => toggleTaskCompletion(tarea)}
-                        >
-                          {tarea.completada ? "Desmarcar" : "Completar"}
-                        </button>
-                        <button onClick={() => onDeleteTask(tarea.id)}>
-                          Eliminar tarea
-                        </button>
+                        <div className="task-actions">
+                          <button onClick={() => handleTaskEdit(tarea)}>
+                            Editar
+                          </button>
+                          <button onClick={() => toggleTaskCompletion(tarea)}>
+                            {tarea.completada ? "Desmarcar" : "Completar"}
+                          </button>
+                          <button onClick={() => onDeleteTask(tarea.id)}>
+                            Eliminar
+                          </button>
+                        </div>
                       </>
                     )}
                   </li>
@@ -154,12 +157,14 @@ const TaskForm = ({ folderId, onAddTask }) => {
         value={taskName}
         onChange={(e) => setTaskName(e.target.value)}
         required
+        className="task-input"
       />
       <input
         type="text"
         placeholder="Descripción (opcional)"
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}
+        className="task-input"
       />
       <button type="submit">Agregar Tarea</button>
     </form>

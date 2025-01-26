@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FolderList from "./components/FolderList";
 import FolderForm from "./components/FolderForm";
 import Loader from "./components/Loader";
+import "./theme.css"; // Asegúrate de importar el archivo de estilos del tema
 import {
   obtenerTodasLasCarpeta,
   eliminarUnaCarpeta,
@@ -14,16 +15,32 @@ import {
 const App = () => {
   const [folders, setFolders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [theme, setTheme] = useState("light");
+
+  // Cargar el tema desde localStorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
+  // Alternar tema y guardar en localStorage
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
 
   const fetchFolders = async () => {
-    setIsLoading(true); // Inicia la barra de carga
+    setIsLoading(true);
     try {
       const response = await obtenerTodasLasCarpeta();
       setFolders(Array.isArray(response) ? response : []);
     } catch (error) {
       console.error("Error fetching folders:", error);
     } finally {
-      setIsLoading(false); // Detén la barra de carga
+      setIsLoading(false);
     }
   };
 
@@ -82,18 +99,26 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Gestión de Carpetas</h1>
+    <div className="app-container">
+      <header className="app-header">
+        <h1>Gestión de Carpetas</h1>
+        <button className="theme-toggle" onClick={toggleTheme}>
+          Cambiar a {theme === "light" ? "Oscuro" : "Claro"}
+        </button>
+      </header>
       {isLoading && <Loader />}
-      <FolderForm onFolderCreated={fetchFolders} />
-      <FolderList
-        folders={folders}
-        onDeleteFolder={handleDeleteFolder}
-        onEditFolder={handleEditFolder}
-        onAddTask={handleAddTask}
-        onDeleteTask={handleDeleteTask}
-        onEditTask={handleEditTask}
-      />
+      <main className="app-content">
+        <FolderForm onFolderCreated={fetchFolders} />
+        <FolderList
+          folders={folders}
+          onDeleteFolder={handleDeleteFolder}
+          onEditFolder={handleEditFolder}
+          onAddTask={handleAddTask}
+          onDeleteTask={handleDeleteTask}
+          onEditTask={handleEditTask}
+        />
+      </main>
+      <footer className="app-footer">© 2025 Mi Aplicación Familiar</footer>
     </div>
   );
 };
