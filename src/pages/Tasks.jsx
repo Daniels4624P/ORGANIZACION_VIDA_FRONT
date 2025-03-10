@@ -56,7 +56,6 @@ function Tasks() {
 
   const fetchFolders = async () => {
     try {
-      const publicFoldersData = await getPublicFolders()
       const privateFoldersData = await getPrivateFolders()
       setPublicFolders(publicFoldersData.data.map((folder) => folder.id))
       setFolders([...publicFoldersData.data, ...privateFoldersData.data])
