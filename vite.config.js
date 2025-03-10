@@ -1,8 +1,16 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+import path from "path"
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  base: '/', // Cambia '/' si tu app estará en un subdirectorio, como '/mi-app/'
+  build: {
+    chunkSizeWarningLimit: 1000, // Aumenta el límite a 1 MB
+  },
   plugins: [react()],
-});
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+})
+

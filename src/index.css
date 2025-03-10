@@ -1,106 +1,52 @@
-/* App.css - Diseño moderno y minimalista */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background-color: #f4f4f4; /* Color de fondo claro */
-  --text-color: #333333;      /* Color principal del texto */
-  --primary-color: #0078ff;   /* Color principal para botones y resaltados */
-  --secondary-color: #e5e7eb; /* Color de fondo de botones y bordes */
-  --hover-color: #0056b3;     /* Color de botón al pasar el cursor */
-  --font-family: "Inter", sans-serif;
+/* Transiciones globales */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.hover\:shadow-lg:hover {
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
+    skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 body {
-  font-family: var(--font-family);
-  margin: 0;
-  padding: 0;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  line-height: 1.6;
+  @apply bg-white text-black transition-colors duration-200;
 }
 
-div {
-  padding: 2rem;
-  max-width: 960px;
-  margin: 0 auto;
-  background-color: var(--background-color);
+.dark body {
+  @apply bg-[#191919] text-white;
 }
 
-h1 {
-  text-align: center;
-  color: var(--primary-color);
-  font-size: 2.75rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  transition: color 0.3s ease;
+/* Estilos adicionales para imitar Notion */
+.dark .notion-style {
+  @apply bg-[#202020] text-[#D3D3D3];
 }
 
-button {
-  background-color: var(--primary-color);
-  color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  padding: 0.75rem 1.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.dark .notion-sidebar {
+  @apply bg-[#202020] border-r border-[#2F3437];
 }
 
-button:hover {
-  background-color: var(--hover-color);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.dark .notion-header {
+  @apply bg-[#202020] border-b border-[#2F3437];
 }
 
-button:active {
-  transform: translateY(0);
+.dark .notion-button {
+  @apply bg-[#37352F] text-[#D3D3D3] hover:bg-[#454158];
 }
 
-input {
-  padding: 0.75rem;
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px;
-  margin-right: 0.5rem;
-  width: 100%;
-  max-width: 400px;
-  background-color: #ffffff;
-  color: var(--text-color);
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+.dark .notion-input {
+  @apply bg-[#202020] border-[#37352F] text-[#D3D3D3];
 }
 
-input:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 5px var(--primary-color);
-}
-
-form {
-  margin-bottom: 1.5rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-form input,
-form button {
-  max-width: 400px;
-}
-
-div.loading {
-  opacity: 0.6;
-  pointer-events: none;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 0.6;
-  }
-}

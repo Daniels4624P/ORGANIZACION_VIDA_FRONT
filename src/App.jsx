@@ -1,126 +1,60 @@
-import React, { useState, useEffect } from "react";
-import FolderList from "./components/FolderList";
-import FolderForm from "./components/FolderForm";
-import Loader from "./components/Loader";
-import "./theme.css"; // Asegúrate de importar el archivo de estilos del tema
-import {
-  obtenerTodasLasCarpeta,
-  eliminarUnaCarpeta,
-  actualizarUnaCarpeta,
-  crearUnaTarea,
-  eliminarUnaTarea,
-  actulizarUnaTarea,
-} from "./services/api";
+import { Routes, Route } from "react-router-dom"
+import { ThemeProvider } from "./contexts/ThemeContext"
+import Sidebar from "./components/Sidebar"
+import Header from "./components/Header"
+import Register from "./pages/Register"
+import Login from "./pages/Login"
+import Profile from "./pages/Profile"
+import Users from "./pages/Users"
+import Projects from "./pages/Projects"
+import Folders from "./pages/Folders"
+import Tasks from "./pages/Tasks"
+import Home from "./pages/Home"
+import UsersPoints from "./pages/UsersPoints"
+import TasksChart from "./pages/TasksChart"
+import PasswordRecovery from "./pages/PasswordRecovery"
+import ChangePassword from "./pages/ChangePassword"
+import Accounts from "./pages/Accounts"
+import Expenses from "./pages/Expenses"
+import Categories from "./pages/Categories"
+import Finances from "./pages/Finances"
+import Incomes from "./pages/Incomes"
 
-const App = () => {
-  const [folders, setFolders] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [theme, setTheme] = useState("light");
-
-  // Cargar el tema desde localStorage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }, []);
-
-  // Alternar tema y guardar en localStorage
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-  };
-
-  const fetchFolders = async () => {
-    setIsLoading(true);
-    try {
-      const response = await obtenerTodasLasCarpeta();
-      setFolders(Array.isArray(response) ? response : []);
-    } catch (error) {
-      console.error("Error fetching folders:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDeleteFolder = async (id) => {
-    try {
-      await eliminarUnaCarpeta(id);
-      fetchFolders();
-    } catch (error) {
-      console.error("Error deleting folder:", error);
-    }
-  };
-
-  const handleEditFolder = async (id, newName) => {
-    try {
-      await actualizarUnaCarpeta(id, { nombre: newName });
-      fetchFolders();
-    } catch (error) {
-      console.error("Error editing folder:", error);
-    }
-  };
-
-  const handleAddTask = async (folderId, task) => {
-    try {
-      const payload = {
-        carpetaId: folderId,
-        nombre: task.nombre,
-        descripcion: task.descripcion,
-      };
-      await crearUnaTarea(payload);
-      fetchFolders();
-    } catch (error) {
-      console.error("Error adding task:", error.response?.data || error.message);
-    }
-  };
-
-  const handleDeleteTask = async (taskId) => {
-    try {
-      await eliminarUnaTarea(taskId);
-      fetchFolders();
-    } catch (error) {
-      console.error("Error deleting task:", error);
-    }
-  };
-
-  const handleEditTask = async (taskId, updatedTask) => {
-    try {
-      await actulizarUnaTarea(taskId, updatedTask);
-      fetchFolders();
-    } catch (error) {
-      console.error("Error editing task:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchFolders();
-  }, []);
-
+function App() {
   return (
-    <div className="app-container">
-      <header className="app-header">
-        <h1>Gestión de Carpetas</h1>
-        <button className="theme-toggle" onClick={toggleTheme}>
-          Cambiar a {theme === "light" ? "Oscuro" : "Claro"}
-        </button>
-      </header>
-      {isLoading && <Loader />}
-      <main className="app-content">
-        <FolderForm onFolderCreated={fetchFolders} />
-        <FolderList
-          folders={folders}
-          onDeleteFolder={handleDeleteFolder}
-          onEditFolder={handleEditFolder}
-          onAddTask={handleAddTask}
-          onDeleteTask={handleDeleteTask}
-          onEditTask={handleEditTask}
-        />
-      </main>
-      <footer className="app-footer">© 2025 Mi Aplicación Familiar</footer>
-    </div>
-  );
-};
+    <ThemeProvider>
+      <div className="flex h-screen bg-white dark:bg-[#191919] text-black dark:text-white transition-colors duration-200">
+        <Sidebar />
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <Header />
+          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#F7F6F3] dark:bg-[#202020] transition-colors duration-200">
+            <div className="container mx-auto px-6 py-8">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/folders" element={<Folders />} />
+                <Route path="/tasks" element={<Tasks />} />
+                <Route path="/users/points" element={<UsersPoints />} />
+                <Route path="/tasks/monthly" element={<TasksChart />} />
+                <Route path="/password-recovery" element={<PasswordRecovery />} />
+                <Route path="/recovery" element={<ChangePassword />} />
+                <Route path="/accounts" element={<Accounts />} />
+                <Route path="/expenses" element={<Expenses />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/finances" element={<Finances />} />
+                <Route path="/incomes" element={<Incomes />} />
+              </Routes>
+            </div>
+          </main>
+        </div>
+      </div>
+    </ThemeProvider>
+  )
+}
 
-export default App;
+export default App
+
