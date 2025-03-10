@@ -37,46 +37,6 @@ function Sidebar() {
                 Profile
               </Link>
 
-              {/* Finanzas */}
-              <div className="mt-4 mb-2 px-4">
-                <h3 className="text-sm font-semibold text-notion-text dark:text-notion-text-dark">Finances</h3>
-              </div>
-              <Link
-                to="/accounts"
-                onClick={closeSidebar}
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-notion-gray-dark dark:hover:bg-notion-gray text-notion-text dark:text-notion-text-dark"
-              >
-                Accounts
-              </Link>
-              <Link
-                to="/expenses"
-                onClick={closeSidebar}
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-notion-gray-dark dark:hover:bg-notion-gray text-notion-text dark:text-notion-text-dark"
-              >
-                Expenses
-              </Link>
-              <Link
-                to="/incomes"
-                onClick={closeSidebar}
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-notion-gray-dark dark:hover:bg-notion-gray text-notion-text dark:text-notion-text-dark"
-              >
-                Incomes
-              </Link>
-              <Link
-                to="/categories"
-                onClick={closeSidebar}
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-notion-gray-dark dark:hover:bg-notion-gray text-notion-text dark:text-notion-text-dark"
-              >
-                Categories
-              </Link>
-              <Link
-                to="/finances"
-                onClick={closeSidebar}
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-notion-gray-dark dark:hover:bg-notion-gray text-notion-text dark:text-notion-text-dark"
-              >
-                Export Finances
-              </Link>
-
               {/* Tareas */}
               <div className="mt-4 mb-2 px-4">
                 <h3 className="text-sm font-semibold text-notion-text dark:text-notion-text-dark">Tasks</h3>
@@ -114,13 +74,6 @@ function Sidebar() {
               <div className="mt-4 mb-2 px-4">
                 <h3 className="text-sm font-semibold text-notion-text dark:text-notion-text-dark">Users</h3>
               </div>
-              <Link
-                to="/users/points"
-                onClick={closeSidebar}
-                className="block py-2.5 px-4 rounded transition duration-200 hover:bg-notion-gray-dark dark:hover:bg-notion-gray text-notion-text dark:text-notion-text-dark"
-              >
-                User Points
-              </Link>
               {user.isAdmin && (
                 <Link
                   to="/users"
