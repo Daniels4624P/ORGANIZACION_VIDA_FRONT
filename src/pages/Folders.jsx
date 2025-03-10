@@ -17,7 +17,6 @@ function Folders() {
 
   const fetchFolders = async () => {
     try {
-      const publicFolders = await getPublicFolders();
       const privateFolders = await getPrivateFolders();
       setFolders([...publicFolders.data, ...privateFolders.data]);
     } catch (error) {
