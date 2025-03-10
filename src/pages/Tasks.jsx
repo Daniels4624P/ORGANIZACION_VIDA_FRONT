@@ -57,8 +57,7 @@ function Tasks() {
   const fetchFolders = async () => {
     try {
       const privateFoldersData = await getPrivateFolders()
-      setPublicFolders(publicFoldersData.data.map((folder) => folder.id))
-      setFolders([...publicFoldersData.data, ...privateFoldersData.data])
+      setFolders([...privateFoldersData.data])
     } catch (error) {
       console.error("Error fetching folders:", error)
     }
